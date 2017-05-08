@@ -1,0 +1,29 @@
+﻿@model IEnumerable<MovieShopXS_DruwelLaurens.ViewModels.MoviesViewModel>
+@foreach (var movie in Model)
+{
+    
+
+    <h1>@movie.Title</h1>
+    <p>(@movie.Year)</p>
+    <p>@movie.Description</p>
+
+    <h2>The Director</h2>
+    <p>@movie.Director</p>
+
+    <h2>Actors</h2>
+
+    @foreach (var actor in @movie.Actors)
+    {
+        <p>@actor.Name</p>
+    }
+
+    <h2>How much is this rated?</h2>
+    <p>@movie.Stars</p>
+
+    <hr />
+}
+
+
+
+<h3>@ViewData["Message"]</h3>
+

@@ -7,5 +7,6 @@ namespace MovieShopXS_DruwelLaurens.ViewModels
 {
     public class ActorViewModel
     {
+        public string Name { get; set; }
     }
 }

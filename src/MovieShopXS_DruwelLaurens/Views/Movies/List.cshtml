@@ -1,0 +1,59 @@
+﻿@model IEnumerable<MovieShopXS_DruwelLaurens.ViewModels.MoviesViewModel>
+
+@foreach (var movie in Model)
+{
+    <div class="row">
+        <img  src="#" alt="thumbnail">
+        <div class="col-sm-8">
+            <h1>@movie.Title</h1>
+            <p>@movie.Year</p>
+            <p>@movie.Description</p>
+
+            <h2>The Director</h2>
+            <p>@movie.Director</p>
+
+            <h2>Actor(s)</h2>
+
+            @foreach (var actor in @movie.Actors)
+            {
+                <p>@actor</p>
+            }
+
+            <h2>How much is this rated?</h2>
+
+            <p>
+                @movie.Stars
+
+            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+
+            <a href='@Url.Action("UpdateRating", "Movie", new { rate = "up", id = $"{movie.Id}" }, null)'>
+                <span class="glyphicon glyphicon-chevron-up" aria-hidden="true"></span>
+            </a>
+            <a href='@Url.Action("UpdateRating", "Movie", new { rate = "down", id = $"{movie.Id}" }, null)'>
+                <span class="glyphicon glyphicon-chevron-down" aria-hidden="true"></span>
+
+            </a>
+        </p>
+
+
+        @*@Html.ActionLink("Rate Up |", "UpdateRating", "Movie", new { rate = "up", id = $"{movie.Id}" }, null)
+            @Html.ActionLink("Rate down", "UpdateRating", "Movie", new { rate = "down", id = $"{movie.Id}" }, null)*@
+
+    </div>
+
+</div>
+    @if (movie != Model.Last())
+    {
+        <hr />
+    }
+
+}
+
+
+
+
+
+
+
+
+

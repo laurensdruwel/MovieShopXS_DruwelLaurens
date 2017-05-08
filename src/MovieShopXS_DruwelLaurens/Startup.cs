@@ -7,8 +7,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using MovieShopXS_DruwelLaurens.Entities;
 using Microsoft.EntityFrameworkCore;
+using MovieShopXS_DruwelLaurens.Entities;
 
 namespace MovieShopXS_DruwelLaurens
 {
@@ -33,17 +33,16 @@ namespace MovieShopXS_DruwelLaurens
         public IConfigurationRoot Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-
-            public void ConfigureServices(IServiceCollection services)
+        public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
             services.AddApplicationInsightsTelemetry(Configuration);
-            services.AddMvc();
+
             services.AddDbContext<MovieBaseContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("EXAMPLEDB")));
+                    options.UseSqlServer(Configuration.GetConnectionString("MovieBase")));
+
+            services.AddMvc();
         }
-
-
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
@@ -69,7 +68,14 @@ namespace MovieShopXS_DruwelLaurens
 
             app.UseMvc(routes =>
             {
-                routes.MapRoute(
+                routes
+                .MapRoute(
+                    name: "year",
+                    template: "{controller=Movies}/{action=Year}/{year}")
+                .MapRoute(
+                    name: "rating",
+                    template: "{controller=Movies}/{action=UpdateRating}/{id}/{rate}")
+                .MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
