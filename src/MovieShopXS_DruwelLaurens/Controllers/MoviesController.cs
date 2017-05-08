@@ -18,12 +18,10 @@ namespace MovieShopXS_DruwelLaurens.Controllers
         {
             db = context;
         }
-        // GET: /<controller>/
-        public IActionResult Index()
-        {
-            return View();
-        }
 
+        [Route("")]
+        [Route("Movies")]
+        [Route("Movies/List")]
         public IActionResult List()
         {
             return View(db.Movie
@@ -31,10 +29,10 @@ namespace MovieShopXS_DruwelLaurens.Controllers
                 {
                     Id = e.MovieId,
                     Title = e.Title,
+                    Image = @"Images/" + e.Title + ".jpg",
                     Year = e.Year,
                     Description = e.Description,
-                    Image = "",
-                    Stars = e.Stars,
+                    Stars = Convert.ToInt32(e.Stars),
                     Director = $"{e.Director.FirstName} {e.Director.LastName}",
                     Actors = e.MovieActor.Select(ma => new ActorViewModel
                     {
@@ -42,10 +40,11 @@ namespace MovieShopXS_DruwelLaurens.Controllers
                     }).ToList()
                 })
                 .ToList());
-
-
         }
 
+
+    
+        [Route("Year/{year}")]
         public IActionResult Year(string year)
         {
 
@@ -70,7 +69,7 @@ namespace MovieShopXS_DruwelLaurens.Controllers
                 .ToList();
 
                 if (movieList.Count == 0)
-                    ViewData["Message"] = $"No movies for the year {year}";
+                    ViewData["Message"] = $"No movies found for the year {year}";
 
                 return View(movieList);
 
@@ -78,7 +77,7 @@ namespace MovieShopXS_DruwelLaurens.Controllers
             else
             {
 
-                ViewData["Message"] = $"No year given!";
+                ViewData["Message"] = $"Please enter a (valid) year!";
                 return View(new List<MoviesViewModel>());
             }
         }

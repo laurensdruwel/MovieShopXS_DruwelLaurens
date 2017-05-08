@@ -66,19 +66,21 @@ namespace MovieShopXS_DruwelLaurens
 
             app.UseStaticFiles();
 
-            app.UseMvc(routes =>
-            {
-                routes
-                .MapRoute(
-                    name: "year",
-                    template: "{controller=Movies}/{action=Year}/{year}")
-                .MapRoute(
-                    name: "rating",
-                    template: "{controller=Movies}/{action=UpdateRating}/{id}/{rate}")
-                .MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-            });
+            app.UseMvc(
+            //    routes =>
+            //{
+            //    routes
+            //    .MapRoute(
+            //        name: "year",
+            //        template: "{controller=Movies}/{action=Year}/{year}")
+            //    .MapRoute(
+            //        name: "rating",
+            //        template: "{controller=Movies}/{action=UpdateRating}/{id}/{rate}")
+            //    .MapRoute(
+            //        name: "default",
+            //        template: "{controller=Home}/{action=Index}/{id?}");
+            //}
+            );
         }
     }
 }
